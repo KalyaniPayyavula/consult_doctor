@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test snapshot for page layout 1`] = `
+<div>
+  <div
+    class="StyledBox-sc-13pk1d4-0 IRSNj"
+    data-testid="undefined-page-layout"
+  >
+    <div
+      class="StyledBox-sc-13pk1d4-0 cwscoI"
+    >
+      <p>
+         Header 
+      </p>
+    </div>
+    <div
+      class="StyledBox-sc-13pk1d4-0 ccvWIr"
+    >
+      <p>
+         Content 
+      </p>
+    </div>
+    <div
+      class="StyledBox-sc-13pk1d4-0 fZCeFG"
+    >
+      <p>
+         Footer 
+      </p>
+    </div>
+  </div>
+</div>
+`;

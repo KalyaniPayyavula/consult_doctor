@@ -1,0 +1,10 @@
+// Login
+export const SET_AUTH_STATE = "SET_AUTH_STATE";
+export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR";
+export const SET_USER_DETAILS = "SET_USER_DETAILS";
+
+// DOCTOR DEETAILS
+export const SET_DOCTOR_DETAILS = "SET_DOCTOR_DETAILS";
+
+// Set Appointment Details
+export const SET_APPOINTMENT_DETAILS = "SET_APPOINTMENT_DETAILS";
