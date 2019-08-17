@@ -4,7 +4,7 @@ import { MelodyText, MelodyBox, MelodyButton } from "../basic_components";
 import { List, ListItem } from "../app_components";
 
 let userProfile = [
-  { key: "User Name", value: "Pathi" },
+  { key: "User Name", value: "John" },
   { key: "Password", value: "****" },
   { key: "Mobile Number", value: "+91 89519 06517" },
   { key: "Email", value: "abc@gmail.com" },

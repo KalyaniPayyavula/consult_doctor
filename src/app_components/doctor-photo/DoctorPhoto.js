@@ -1,6 +1,12 @@
 import React from "react";
-import { MelodyBox, MelodyImage, MelodyButton } from "../../basic_components";
+import {
+  MelodyBox,
+  MelodyImage,
+  MelodyButton,
+  MelodyText
+} from "../../basic_components";
 import PropTypes from "prop-types";
+import { Location } from "grommet-icons";
 
 const DoctorPhoto = ({ bookAppointment, doctorData, isButtonRequired }) => {
   const photoImage = require(`../../resources/${doctorData.photo}`);
@@ -8,6 +14,13 @@ const DoctorPhoto = ({ bookAppointment, doctorData, isButtonRequired }) => {
     <MelodyBox flex="true" direction="column" gap="small">
       <MelodyBox align="center" justify="center" flex={{ grow: "3" }}>
         <MelodyImage src={photoImage} fit="contain" alignSelf="center" />
+      </MelodyBox>
+      <MelodyBox align="center" justify="center">
+        <MelodyText weight="bold">Dr.{doctorData.name}</MelodyText>
+      </MelodyBox>
+      <MelodyBox align="center" justify="center" direction="row">
+        <Location />
+        <MelodyText>{doctorData.location}</MelodyText>
       </MelodyBox>
       {isButtonRequired && (
         <MelodyBox align="center">

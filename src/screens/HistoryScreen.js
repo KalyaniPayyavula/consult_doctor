@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MelodyHeading,
   MelodyBox,
@@ -7,6 +7,7 @@ import {
   MelodyButton
 } from "../basic_components";
 import { dateWithMonth } from "../utils/date-utils";
+import { ConfirmationDialog } from "../app_components";
 
 const timeNow = new Date().getTime();
 let dayInMS = 24 * 60 * 60 * 1000;
@@ -75,7 +76,7 @@ const pastData = [
   }
 ];
 
-const AppointmentTable = ({ headings, data }) => {
+const AppointmentTable = ({ headings, data, showCancelConfirmation }) => {
   return (
     <MelodyDataTable
       columns={[
@@ -99,7 +100,7 @@ const AppointmentTable = ({ headings, data }) => {
               return (
                 <MelodyButton
                   label={data.cancel.label}
-                  onClick={data.handleCancel}
+                  onClick={showCancelConfirmation}
                 />
               );
             }
@@ -112,6 +113,16 @@ const AppointmentTable = ({ headings, data }) => {
 };
 
 function HistoryScreen() {
+  let [askConfirmation, setConfirmation] = useState(false);
+
+  const closeConfiramtion = () => {
+    setConfirmation(false);
+  };
+
+  const showCancelConfirmation = () => {
+    setConfirmation(true);
+  };
+
   return (
     <MelodyBox>
       <MelodyHeading size="small">Future Appointments:</MelodyHeading>
@@ -119,12 +130,23 @@ function HistoryScreen() {
         <AppointmentTable
           headings={futureAppointmentHeadings}
           data={futureData}
+          showCancelConfirmation={showCancelConfirmation}
         />
       </MelodyBox>
       <MelodyHeading size="small">Past Appointments:</MelodyHeading>
       <MelodyBox border={{ color: "gray" }} elevation="small" round="medium">
         <AppointmentTable headings={pastAppointmentHeadings} data={pastData} />
       </MelodyBox>
+      {askConfirmation && (
+        <ConfirmationDialog
+          heading="Confirm"
+          text="Are you sure you want to cancel the appointment?"
+          primaryButton="Proceed"
+          secondaryButton="Cancel"
+          onClose={closeConfiramtion}
+          primaryButtonAction={closeConfiramtion}
+        />
+      )}
     </MelodyBox>
   );
 }
