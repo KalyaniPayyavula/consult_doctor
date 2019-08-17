@@ -103,7 +103,7 @@ const AppointmentGrid = props => {
     } else {
       dispatch({
         type: types.SET_APPOINTMENT_DETAILS,
-        appointmentDetails: { selDate: timeSlot.slot, selTime: date }
+        appointmentDetails: { selDate: date, selTime: timeSlot.slot }
       });
       setConfirmationMsg(
         `Are you sure you want to book ${timeSlot.slot} slot on ${date}?`
