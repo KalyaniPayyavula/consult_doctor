@@ -12,3 +12,6 @@ export { default as AppNotification } from "./app-notification/AppNotification";
 export {
   default as ConfirmationDialog
 } from "./confirmation-dialog/ConfirmationDialog";
+export { default as FormFieldLabel } from "./form-field-label/FormFieldLabel";
+export { default as DoctorList } from "./doctor-list/DoctorList";
+export { default as AvailableSlots } from "./available-slots/AvailableSlots";

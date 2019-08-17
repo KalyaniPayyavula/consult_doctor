@@ -1,13 +1,18 @@
 //This screen will help to register a new user.
 //Takes all user details.
 import React from "react";
-import { PageLayout, AppHeader, AppFooter } from "../app_components";
+import {
+  PageLayout,
+  AppHeader,
+  AppFooter,
+  FormFieldLabel
+} from "../app_components";
 import {
   MelodyButton,
   MelodyForm,
-  MelodyFormField,
   MelodyBox,
-  MelodyHeading
+  MelodyHeading,
+  MelodyText
 } from "../basic_components";
 import { withRouter } from "react-router";
 
@@ -21,23 +26,30 @@ const RegisterForm = withRouter(props => {
       <MelodyHeading>Register User</MelodyHeading>
       <MelodyBox>
         <MelodyBox width="medium">
-          <MelodyForm>
-            <MelodyFormField label="Name" name="name" required={true} />
-            <MelodyFormField label="Mobile No" name="mobileNo" />
-            <MelodyFormField label="Mail Id" name="mailId" />
-            <MelodyFormField label="Password" name="password" type="password" />
-            <MelodyFormField
+          <MelodyForm onSubmit={registerUser}>
+            <FormFieldLabel label="UserId" name="UserId" required />
+            <FormFieldLabel
+              label="Password"
+              name="password"
+              type="password"
+              required
+            />
+            <FormFieldLabel
               label="Confirm Password"
               name="confirmPassword"
               type="password"
+              required
             />
-            <MelodyFormField label="Line1" name="addr-line1" />
-            <MelodyFormField label="Line2" name="addr-line2" />
-            <MelodyFormField label="City" name="city" />
-            <MelodyFormField label="State" name="state" />
-            <MelodyFormField label="ZipCode" name="zip-code" />
+            <FormFieldLabel label="Mobile No" name="mobileNo" required />
+            <FormFieldLabel label="EMail" name="email" required />
+            <MelodyText>Address:</MelodyText>
+            <FormFieldLabel label="Line1" name="addr-line1" />
+            <FormFieldLabel label="Line2" name="addr-line2" />
+            <FormFieldLabel label="City" name="city" />
+            <FormFieldLabel label="State" name="state" />
+            <FormFieldLabel label="ZipCode" name="zip-code" />
 
-            <MelodyButton label="Register" onClick={registerUser} />
+            <MelodyButton type="submit" label="Register" primary />
           </MelodyForm>
         </MelodyBox>
       </MelodyBox>

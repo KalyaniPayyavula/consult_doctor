@@ -12,7 +12,7 @@ import {
   MelodyHeading,
   MelodyText
 } from "../basic_components";
-import { AppNotification } from "../app_components";
+import { AppNotification, FormFieldLabel } from "../app_components";
 
 const RegisterForm = withRouter(props => {
   const appointmentDetails = useSelector(
@@ -22,7 +22,7 @@ const RegisterForm = withRouter(props => {
     props.history.push("/");
   };
 
-  const bookAppointment = () => {
+  const bookAppointment = event => {
     setShowMsg(true);
   };
 
@@ -41,14 +41,25 @@ const RegisterForm = withRouter(props => {
           } `}</MelodyText>
         </MelodyBox>
         <MelodyBox width="medium" margin={{ top: "medium" }}>
-          <MelodyForm>
-            <MelodyFormField label="Name" name="name" required={true} />
-            <MelodyFormField label="Mobile No" name="mobileNo" />
-            <MelodyFormField label="Mail Id" name="mailId" />
-            <MelodyFormField label="Problem Description" name="pr-descr" />
+          <MelodyForm onSubmit={bookAppointment}>
+            <FormFieldLabel label="Name" name="name" required />
+            <FormFieldLabel label="Mobile No" name="mobileNo" required />
+            <FormFieldLabel label="Mail Id" name="mailId" required />
+            <FormFieldLabel
+              label="Problem Description"
+              name="pr-descr"
+              required
+            />
             <MelodyFormField label="Tests Done" name="test-done" />
 
-            <MelodyButton label="Book Appointment" onClick={bookAppointment} />
+            <MelodyButton type="submit" primary label="Book Appointment" />
+            <MelodyText
+              margin={{ left: "small" }}
+              size="small"
+              color="status-critical"
+            >
+              * Required Field
+            </MelodyText>
           </MelodyForm>
         </MelodyBox>
       </MelodyBox>

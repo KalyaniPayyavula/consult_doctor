@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { MelodyText, MelodyBox, MelodyButton } from "../basic_components";
-import { MenuLayout, AppFooter } from "../app_components";
+import {
+  MenuLayout,
+  AppFooter,
+  DoctorList,
+  AvailableSlots
+} from "../app_components";
 import ProfileScreen from "./ProfileScreen";
 import HistoryScreen from "./HistoryScreen";
-import BookAppointmentScreen from "./BookAppointmentScreen";
+
 import { AppHeader } from "../app_components";
 import { withRouter } from "react-router";
 import { Route } from "react-router-dom";
@@ -11,6 +17,11 @@ import { Route } from "react-router-dom";
 //sidebar
 const Sidebar = withRouter(props => {
   const [menuSelected, setMenuSelected] = useState(0);
+
+  useEffect(() => {
+    props.history.push(`/PatientHomeScreen/BookAppointment`);
+  }, [props.history]);
+
   const menuItemHandler = name => {
     let route = "/";
     switch (name) {
@@ -56,12 +67,24 @@ const Sidebar = withRouter(props => {
 });
 
 //content
-const Content = () => {
+const Content = withRouter(props => {
+  const bookAppointment = doctorId => {
+    props.history.push(`/PatientHomeScreen/AvailableSlots/${doctorId}`);
+  };
   return (
     <React.Fragment>
       <Route
         path={`/PatientHomeScreen/BookAppointment`}
-        component={BookAppointmentScreen}
+        component={() => (
+          <DoctorList
+            doctorList={props.doctorList}
+            bookAppointment={bookAppointment}
+          />
+        )}
+      />
+      <Route
+        path={`/PatientHomeScreen/AvailableSlots/:doctorId`}
+        component={() => <AvailableSlots />}
       />
       <Route
         path={`/PatientHomeScreen/CheckHistory`}
@@ -73,9 +96,10 @@ const Content = () => {
       />
     </React.Fragment>
   );
-};
+});
 
 function PatientHomeScreen(props) {
+  const doctorList = useSelector(state => state["doctorReducer"].doctorList);
   const logoutHandler = () => {
     props.history.push("/");
   };
@@ -90,7 +114,7 @@ function PatientHomeScreen(props) {
         />
       }
       sidebar={<Sidebar />}
-      content={<Content />}
+      content={<Content doctorList={doctorList} />}
       footer={<AppFooter />}
     />
   );

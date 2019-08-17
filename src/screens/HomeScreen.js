@@ -1,43 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import * as types from "../actions/action_types";
 import {
   AppHeader,
   AppFooter,
   PageLayout,
-  TwoColumnLayout,
-  DoctorPhoto,
-  DoctorProfile
+  DoctorList
 } from "../app_components";
 
 import LoginLayer from "./LoginLayer";
-
-const HomeScreenContent = withRouter(props => {
-  const { history, doctorList } = props;
-  const bookAppointment = doctorId => {
-    history.push(`/BookAppointment/${doctorId}`);
-  };
-
-  return (
-    <React.Fragment>
-      {doctorList.map(doctorData => (
-        <TwoColumnLayout
-          dataTestId="doctor-homescreen"
-          key={doctorData.id}
-          leftColumn={
-            <DoctorPhoto
-              doctorData={doctorData}
-              bookAppointment={bookAppointment}
-              isButtonRequired={true}
-            />
-          }
-          rightColumn={<DoctorProfile doctorData={doctorData} />}
-        />
-      ))}
-    </React.Fragment>
-  );
-});
 
 const HomeScreen = props => {
   const doctorList = useSelector(state => state["doctorReducer"].doctorList);
@@ -64,6 +35,10 @@ const HomeScreen = props => {
     props.history.push("/PatientHomeScreen");
   };
 
+  const bookAppointment = doctorId => {
+    props.history.push(`/BookAppointment/${doctorId}`);
+  };
+
   return (
     <React.Fragment>
       <PageLayout
@@ -75,7 +50,12 @@ const HomeScreen = props => {
             title="Consult Doctor Online"
           />
         }
-        content={<HomeScreenContent doctorList={doctorList} />}
+        content={
+          <DoctorList
+            doctorList={doctorList}
+            bookAppointment={bookAppointment}
+          />
+        }
         footer={<AppFooter />}
       />
       {showLogin && <LoginLayer onClose={onClose} onSubmit={onSubmit} />}
